@@ -1,0 +1,15 @@
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos temporários
+*.tmp
+
+# Ignorar arquivos de banco de dados
+*.sql
+
+# Ignorar arquivos de backup
+*.bak
+
+# Ignorar diretórios de configuração
+*.idea/
+*.vscode/
