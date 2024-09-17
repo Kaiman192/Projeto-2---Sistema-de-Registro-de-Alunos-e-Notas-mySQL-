@@ -1,0 +1,64 @@
+# Projeto Banco de Dados Escola
+
+Este projeto contém a criação e manipulação de um banco de dados escolar com as seguintes funcionalidades:
+
+1. **Criação do Banco de Dados**: `Escola`
+2. **Tabelas**:
+   - `Alunos`: Armazena informações sobre os alunos.
+   - `Cursos`: Armazena informações sobre os cursos oferecidos.
+   - `Notas`: Armazena as notas dos alunos em cada curso.
+
+## Estrutura do Banco de Dados
+
+### Tabela `Alunos`
+- `id_aluno` (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único do aluno.
+- `nome` (VARCHAR(100), NOT NULL): Nome do aluno.
+- `data_nascimento` (DATE): Data de nascimento do aluno.
+- `endereco` (VARCHAR(255)): Endereço do aluno.
+
+### Tabela `Cursos`
+- `id_curso` (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único do curso.
+- `nome` (VARCHAR(100), NOT NULL): Nome do curso.
+- `descricao` (TEXT): Descrição do curso.
+
+### Tabela `Notas`
+- `id_nota` (INT, AUTO_INCREMENT, PRIMARY KEY): Identificador único da nota.
+- `id_aluno` (INT): Identificador do aluno (chave estrangeira para `Alunos`).
+- `id_curso` (INT): Identificador do curso (chave estrangeira para `Cursos`).
+- `nota` (DECIMAL(4,2)): Nota do aluno no curso.
+
+## Comandos SQL
+
+### Criação do Banco de Dados e Tabelas
+
+```sql
+-- Cria um novo banco de dados chamado "Escola"
+CREATE DATABASE Escola;
+
+-- Seleciona o banco de dados "Escola" para uso
+USE Escola;
+
+-- Cria a tabela "Alunos"
+CREATE TABLE Alunos (
+    id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE,
+    endereco VARCHAR(255)
+);
+
+-- Cria a tabela "Cursos"
+CREATE TABLE Cursos (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+
+-- Cria a tabela "Notas"
+CREATE TABLE Notas (
+    id_nota INT AUTO_INCREMENT PRIMARY KEY,
+    id_aluno INT,
+    id_curso INT,
+    nota DECIMAL(4,2),
+    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno),
+    FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso)
+);
