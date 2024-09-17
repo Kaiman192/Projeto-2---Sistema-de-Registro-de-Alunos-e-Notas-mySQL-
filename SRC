@@ -1,0 +1,65 @@
+-- Cria um novo banco de dados chamado "Escola"
+CREATE DATABASE Escola;
+
+-- Seleciona o banco de dados "Escola" para uso
+USE Escola;
+-- Cria a tabela "Alunos"
+CREATE TABLE Alunos (
+    id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE,
+    endereco VARCHAR(255)
+);
+-- Cria a tabela "Cursos"
+CREATE TABLE Cursos (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+-- Cria a tabela "Notas"
+CREATE TABLE Notas (
+    id_nota INT AUTO_INCREMENT PRIMARY KEY,
+    id_aluno INT,
+    id_curso INT,
+    nota DECIMAL(4,2),
+    FOREIGN KEY (id_aluno) REFERENCES Alunos(id_aluno),
+    FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso)
+);
+-- Insere dados na tabela "Alunos"
+INSERT INTO Alunos (nome, data_nascimento, endereco) VALUES 
+('João Silva', '2000-05-15', 'Rua A, 123'),
+('Maria Oliveira', '1998-09-22', 'Rua B, 456'),
+('Carlos Santos', '2001-11-30', 'Rua C, 789');
+-- Insere dados na tabela "Alunos"
+-- Insere dados na tabela "Cursos"
+INSERT INTO Cursos (nome, descricao) VALUES 
+('Matemática', 'Curso de Matemática Básica'),
+('História', 'Curso de História Geral'),
+('Biologia', 'Curso de Biologia Celular');
+-- Insere dados na tabela "Notas"
+INSERT INTO Notas (id_aluno, id_curso, nota) VALUES 
+(1, 1, 8.5),
+(2, 1, 7.0),
+(3, 2, 9.0),
+(1, 3, 6.5);
+-- Consulta para exibir o nome do aluno, o curso e a nota
+SELECT Alunos.nome AS Nome_Aluno, Cursos.nome AS Nome_Curso, Notas.nota
+FROM Notas
+JOIN Alunos ON Notas.id_aluno = Alunos.id_aluno
+JOIN Cursos ON Notas.id_curso = Cursos.id_curso;
+-- Atualiza a nota de um aluno específico em um curso
+UPDATE Notas
+SET nota = 9.5
+WHERE id_aluno = 1 AND id_curso = 1;
+-- Remove as notas de um aluno específico
+DELETE FROM Notas
+WHERE id_aluno = 1;
+-- Remove as notas de um aluno específico
+DELETE FROM Notas
+WHERE id_aluno = 1;
+-- Remove um aluno específico
+DELETE FROM Alunos
+WHERE id_aluno = 1;
+-- Remove um curso específico
+DELETE FROM Cursos
+WHERE id_curso = 1;
